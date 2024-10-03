@@ -25,12 +25,7 @@ public class MyStoreSteps {
 
     public void agregarPrimerProducto() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //WebElement productElement = wait.until(ExpectedConditions.visibilityOfElementLocated(MyStorePage.firstProduct));
-        //JavascriptExecutor js = (JavascriptExecutor) driver;
-        //js.executeScript("arguments[0].click();", productElement);
-        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("blockcart-modal")));
         wait.until(ExpectedConditions.elementToBeClickable(MyStorePage.firstProduct)).click();
-
         wait.until(ExpectedConditions.elementToBeClickable(MyStorePage.addToCartButton)).click();
         wait.until(ExpectedConditions.elementToBeClickable(MyStorePage.addToCartButtonx2)).click();
     }
@@ -42,13 +37,6 @@ public class MyStoreSteps {
     }
 
 
-    //public boolean validateTotalAmount(String expectedAmount) {
-      //  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        //WebElement totalAmountPopup = wait.until(ExpectedConditions.visibilityOfElementLocated(MyStorePage.totalAmountPopup));
-        //String actualTotal = totalAmountPopup.getText();
-        //return actualTotal.equals(expectedAmount);
-    //}
-
     // Metodo para validar/calcular monto total
     public void validateTotalAmount(double unitPrice) {
 
@@ -59,11 +47,11 @@ public class MyStoreSteps {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement totalAmountElement = wait.until(ExpectedConditions.visibilityOfElementLocated(MyStorePage.totalAmountPopup)); // Reemplaza por el selector real
 
-        // Obtener el texto del monto total y convertirlo a número
+
         String totalText = totalAmountElement.getText().replace("$", "").trim(); // Ajusta el selector y la moneda según sea necesario
         double actualTotal = Double.parseDouble(totalText);
 
-        // Validar que el monto total sea correcto
+
         Assertions.assertEquals(expectedTotal, actualTotal, "El monto total no es correcto. Se esperaba: " + expectedTotal + " pero se obtuvo: " + actualTotal);
 
     }
